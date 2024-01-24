@@ -1,0 +1,19 @@
+// QASM code for a simple quantum circuit
+
+OPENQASM 2.0;
+include "qelib1.inc";
+
+// Define a quantum register with 2 qubits
+qreg q[2];
+// Define a classical register with 2 bits
+creg c[2];
+
+// Apply a Hadamard gate to the first qubit
+h q[0];
+
+// Apply a CNOT gate using the first qubit as control and the second as target
+cx q[0], q[1];
+
+// Measure the qubits
+measure q[0] -> c[0];
+measure q[1] -> c[1];
