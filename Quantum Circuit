@@ -1,0 +1,34 @@
+from qiskit import QuantumCircuit, Aer, execute
+from qiskit.visualization import plot_histogram
+
+# Create a Quantum Circuit acting on a quantum register of two qubits
+circuit = QuantumCircuit(2)
+
+# Apply a Hadamard gate on qubit 0
+circuit.h(0)
+
+# Apply a CNOT gate on qubit 0 controlling qubit 1
+circuit.cx(0, 1)
+
+# Add a Measure gate to see the state
+circuit.measure_all()
+
+# Draw the circuit
+print("Quantum circuit:")
+circuit.draw(output='mpl')
+
+# Use Aer's qasm_simulator
+simulator = Aer.get_backend('qasm_simulator')
+
+# Execute the circuit on the qasm simulator
+job = execute(circuit, simulator, shots=1000)
+
+# Grab results from the job
+result = job.result()
+
+# Returns counts
+counts = result.get_counts(circuit)
+print("\nTotal count for 00 and 11 are:", counts)
+
+# Plot a histogram
+plot_histogram(counts)
