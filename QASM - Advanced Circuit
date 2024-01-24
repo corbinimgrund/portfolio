@@ -1,0 +1,29 @@
+// Advanced Quantum Circuit in QASM
+
+OPENQASM 2.0;
+include "qelib1.inc";
+
+// Define a quantum register with 3 qubits
+qreg q[3];
+// Define a classical register with 3 bits
+creg c[3];
+
+// Apply Hadamard gates to all qubits to create superposition states
+h q[0];
+h q[1];
+h q[2];
+
+// Entangle qubits using CNOT gates
+cx q[0], q[1];
+cx q[1], q[2];
+
+// Apply a phase shift to qubit 2
+t q[2];
+
+// Apply additional Hadamard gate to demonstrate interference
+h q[1];
+
+// Measure all qubits
+measure q[0] -> c[0];
+measure q[1] -> c[1];
+measure q[2] -> c[2];
